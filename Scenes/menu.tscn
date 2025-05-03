@@ -1,7 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://dygh1cjmpwmfr"]
+[gd_scene load_steps=6 format=3 uid="uid://dygh1cjmpwmfr"]
 
 [ext_resource type="Texture2D" uid="uid://crkiaqeygo3eu" path="res://Assets/forest-scene-with-various-forest-trees/eoo2_27z5_210511.jpg" id="1_71y26"]
 [ext_resource type="FontFile" uid="uid://b8rxyoeg4fpki" path="res://Assets/Fonts/janda_manatee/JandaManateeSolid.ttf" id="2_syspd"]
+[ext_resource type="AudioStream" uid="uid://bch4ctl7162ey" path="res://Assets/Sounds/that-game-arcade-236111.mp3" id="3_87381"]
+
+[sub_resource type="GDScript" id="GDScript_5ukqk"]
+script/source = "extends Control
+
+@onready var bg_music: AudioStreamPlayer = $BGMusic
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	bg_music.play()
+	
+	
+
+
+func _on_start_game_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://Scenes/main.tscn\")
+	
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_g6ij7"]
 font = ExtResource("2_syspd")
@@ -15,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_5ukqk")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -80,3 +103,10 @@ theme_override_fonts/font = ExtResource("2_syspd")
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 flat = true
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_87381")
+volume_db = -16.331
+
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="Pet game"
+run/main_scene="res://Scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Manager="*res://Scripts/Autoload/manager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [rendering]
 
